@@ -13,43 +13,51 @@ struct CharactersView: View {
 	
     var body: some View {
 		NavigationView {
-			VStack {
-				ScrollView {
-					ForEach(vm.characters ?? [], id: \.id) { character in
-						CharacterCard(character: character)
-					}
-				}
-				
-				HStack {
-					Button {
-						if currentPage > 1 {
-							currentPage -= 1
-							vm.loadCharacters(page: currentPage)
+			ZStack {
+				VStack {
+					ScrollView {
+						ForEach(vm.characters ?? [], id: \.id) { character in
+							NavigationLink {
+								DetailCharacterView(character: character)
+							} label: {
+								CharacterCard(character: character)
+							}
+							.padding(.horizontal)
 						}
-					} label: {
-						Image(systemName: "arrow.up.circle")
-							.rotationEffect(.degrees(-90))
 					}
 					
-					Spacer()
-					
-					Button {
-						if currentPage < 42 {
-							currentPage += 1
-							vm.loadCharacters(page: currentPage)
+					HStack {
+						Button {
+							if currentPage > 1 {
+								currentPage -= 1
+								vm.loadCharacters(page: currentPage)
+							}
+						} label: {
+							Image(systemName: "arrow.up.circle")
+								.rotationEffect(.degrees(-90))
 						}
-					} label: {
-						Image(systemName: "arrow.up.circle")
-							.rotationEffect(.degrees(90))
+						
+						Spacer()
+						Text("\(currentPage)/42")
+						Spacer()
+						
+						Button {
+							if currentPage < 42 {
+								currentPage += 1
+								vm.loadCharacters(page: currentPage)
+							}
+						} label: {
+							Image(systemName: "arrow.up.circle")
+								.rotationEffect(.degrees(90))
+						}
 					}
+					.padding(.horizontal)
 				}
+				.navigationBarTitle("Characters")
+				.onAppear {
+					vm.loadCharacters(page: currentPage)
 			}
-			.padding(.horizontal)
-			.navigationBarTitle("Omniverse Characters")
-			.onAppear {
-				vm.loadCharacters(page: currentPage)
 			}
-			
 		}
     }
 }
@@ -84,22 +92,43 @@ struct CharacterCard: View {
 					//								.scaleEffect(2)
 				}
 			}
-			.frame(width: 80, height: 80, alignment: .center)
-			.cornerRadius(16)
+			.frame(width: 120, height: 120)
+			.cornerRadius(20)
 			
-			VStack {
+			VStack(alignment: .leading) {
 				Text(character.name)
+					.font(.system(.title3, design: .rounded).weight(.bold))
+					.foregroundColor(Color.orange)
+				Text("Last location:")
+					.font(.system(.footnote, design: .rounded).weight(.regular))
+					.foregroundColor(Color(UIColor.label))
+				Text(character.location.name)
+					.font(.system(.body, design: .rounded).weight(.medium))
+					.foregroundColor(Color(UIColor.label))
+					.lineLimit(1)
+					.minimumScaleFactor(0.5)
+				Text("First seen in:")
+					.font(.system(.footnote, design: .rounded).weight(.regular))
+					.foregroundColor(Color(UIColor.label))
 				Text(firstEpisode)
+					.font(.system(.body, design: .rounded).weight(.medium))
+					.foregroundColor(Color(UIColor.label))
+					.lineLimit(1)
+					.minimumScaleFactor(0.5)
 					.onAppear {
 						vm.loadEpisodeName(url: character.episode.first ?? "") { episodeName in
 							firstEpisode = episodeName
 						}
 					}
 			}
+			.padding(.vertical, 8)
+			.padding(.trailing, 8)
 			
 			Spacer()
 		}
+		.background(Color(UIColor.systemBackground))
 		.cornerRadius(20)
-		.background(Color.blue.opacity(0.2))
+		.shadow(color: Color(UIColor.label).opacity(0.2), radius: 5, x: 2, y: 2)
 	}
 }
+

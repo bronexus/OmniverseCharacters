@@ -29,8 +29,11 @@ struct SearchCharacter: View {
 	}
 }
 
+#if DEBUG
 struct SearchCharacter_Previews: PreviewProvider {
 	static var previews: some View {
 		SearchCharacter()
 	}
 }
+#endif
+
