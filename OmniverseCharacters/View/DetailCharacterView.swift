@@ -8,6 +8,7 @@
 import SwiftUI
 
 struct DetailCharacterView: View {
+	@ObservedObject var vm = DetailCharacterViewModel()
 	var character: RMCharacterModel
 	
 	var body: some View {
@@ -46,8 +47,15 @@ struct DetailCharacterView: View {
 					}
 					.padding(.bottom, 40)
 				}
+				
+				ForEach((vm.locationCharacters ?? []), id: \.id) { character in
+					CharacterCard(character: character)
+				}
 			}
 			.navigationBarTitle(character.name)
+		}
+		.onAppear {
+			vm.loadCurrentLocation(url: character.location.url)
 		}
 	}
 }

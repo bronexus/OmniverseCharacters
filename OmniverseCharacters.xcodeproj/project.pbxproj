@@ -26,6 +26,7 @@
 		2A9A84A627A71A7900B9AF6D /* View+Ext.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2A9A84A327A71A7900B9AF6D /* View+Ext.swift */; };
 		2A9A84A827A7276900B9AF6D /* SearchCharacterViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2A9A84A727A7276900B9AF6D /* SearchCharacterViewModel.swift */; };
 		2A9A84AA27A72C9700B9AF6D /* DetailCharacterView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2A9A84A927A72C9700B9AF6D /* DetailCharacterView.swift */; };
+		2A9A84AC27A7384600B9AF6D /* DetailCharacterViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2A9A84AB27A7384600B9AF6D /* DetailCharacterViewModel.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -49,6 +50,7 @@
 		2A9A84A327A71A7900B9AF6D /* View+Ext.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "View+Ext.swift"; sourceTree = "<group>"; };
 		2A9A84A727A7276900B9AF6D /* SearchCharacterViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SearchCharacterViewModel.swift; sourceTree = "<group>"; };
 		2A9A84A927A72C9700B9AF6D /* DetailCharacterView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DetailCharacterView.swift; sourceTree = "<group>"; };
+		2A9A84AB27A7384600B9AF6D /* DetailCharacterViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DetailCharacterViewModel.swift; sourceTree = "<group>"; };
 		654CB873A2920005B80E5F14 /* Pods-OmniverseCharacters.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-OmniverseCharacters.release.xcconfig"; path = "Target Support Files/Pods-OmniverseCharacters/Pods-OmniverseCharacters.release.xcconfig"; sourceTree = "<group>"; };
 		C625CB91336B2E88238194FD /* Pods-OmniverseCharacters.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-OmniverseCharacters.debug.xcconfig"; path = "Target Support Files/Pods-OmniverseCharacters/Pods-OmniverseCharacters.debug.xcconfig"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
@@ -121,6 +123,7 @@
 			isa = PBXGroup;
 			children = (
 				2A1C0C3D27A6D59300E000CB /* CharacterViewModel.swift */,
+				2A9A84AB27A7384600B9AF6D /* DetailCharacterViewModel.swift */,
 				2A9A84A727A7276900B9AF6D /* SearchCharacterViewModel.swift */,
 			);
 			path = ViewModel;
@@ -269,6 +272,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				2A9A84AC27A7384600B9AF6D /* DetailCharacterViewModel.swift in Sources */,
 				2A9A84A627A71A7900B9AF6D /* View+Ext.swift in Sources */,
 				2A1C0C2F27A6D46200E000CB /* MainView.swift in Sources */,
 				2A1C0C2D27A6D46200E000CB /* OmniverseCharactersApp.swift in Sources */,
