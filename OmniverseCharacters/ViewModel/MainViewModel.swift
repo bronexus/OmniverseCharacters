@@ -10,23 +10,23 @@ import Combine
 
 class MainViewModel: ObservableObject {
 	
-	@Published var myCharacters: [RMCharacterModel]?
+	@Published var characters: [RMCharacterModel]?
 	
 	let rmClient = RMClient()
 	
 	var cancellable: AnyCancellable?
 	
-//	init() {
+	init() {
+	cancellable = rmClient.character().getAllCharacters()
+		.sink(receiveCompletion: { _ in }, receiveValue: { characters in
+			self.characters = characters
+		})
+	}
+	
+//	func getCharacters() {
 //		cancellable = rmClient.character().getAllCharacters()
 //			.sink(receiveCompletion: { _ in }, receiveValue: { characters in
-//				characters.forEach() { print ($0.name) }
+//				self.characters = characters
 //			})
 //	}
-	
-	func getCharacters() {
-		cancellable = rmClient.character().getAllCharacters()
-			.sink(receiveCompletion: { _ in }, receiveValue: { characters in
-				self.myCharacters = characters
-			})
-	}
 }
