@@ -10,14 +10,16 @@ import SwiftUI
 struct MainView: View {
 	@ObservedObject var vm = MainViewModel()
 	
+	@State var searchText: String = ""
+	
     var body: some View {
 		NavigationView {
-			List(vm.myCharacters ?? [], id: \.id) { myCharacter in
+			List((vm.myCharacters ?? []).filter({ searchText.isEmpty ? true : $0.name.contains(searchText) })) { myCharacter in
 				Text(myCharacter.name)
 				
 			}
+			.searchable(text: $searchText, prompt: "Search by name")
 			.navigationTitle("Omniverse Characters")
-			.listStyle(.plain)
 			.onAppear {
 				vm.getCharacters()
 			}
@@ -30,3 +32,5 @@ struct ContentView_Previews: PreviewProvider {
         MainView()
     }
 }
+
+// (todoItems.filter({ searchText.isEmpty ? true : $0.name.contains(searchText) }))
