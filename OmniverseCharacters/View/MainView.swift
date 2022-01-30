@@ -8,52 +8,53 @@
 import SwiftUI
 
 struct MainView: View {
-	@ObservedObject var vm = MainViewModel()
-	
-	@State var searchText: String = ""
+	@State var tabView: TabView = .home
 	
 	var body: some View {
-		NavigationView {
-			if vm.characters?.count == 826 {
-				ScrollView {
-					ForEach((vm.characters ?? []).filter({ searchText.isEmpty ? true : $0.name.contains(searchText) })) { character in
-						HStack {
-							AsyncImage(url: URL(string: character.image)) { image in
-								image
-									.resizable()
-									.scaledToFit()
-							} placeholder: {
-								ZStack {
-									Image("character_image_placeholder")
-										.resizable()
-										.scaledToFit()
-										.blur(radius: 3)
-									ProgressView()
-										.progressViewStyle(CircularProgressViewStyle(tint: Color.orange))
-									//								.scaleEffect(2)
-								}
-							}
-							.frame(width: 80, height: 80, alignment: .center)
-							.cornerRadius(16)
-							Text(character.name)
-							Spacer()
-						}
-						
-					}
+		ZStack {
+			VStack {
+				switch tabView {
+				case .home:
+					CharactersView()
+				case .search:
+					SearchCharacter()
 				}
-				.searchable(text: $searchText, prompt: "Search by name")
-				.navigationTitle("Omniverse Characters")
-			} else {
-				Text("Loading...")
+				
+				HStack {
+					Spacer()
+					
+					Button {
+						tabView = .home
+					} label: {
+						Text("Home")
+							.font(.system(.body, design: .rounded).weight(.bold))
+					}
+					
+					Spacer()
+					
+					Button {
+						tabView = .search
+					} label: {
+						Text("Search")
+							.font(.system(.body, design: .rounded).weight(.bold))
+					}
+					
+					Spacer()
+				}
+				.frame(width: UIScreen.screenWidth, height: 40)
 			}
 		}
 	}
 }
 
+#if DEBUG
 struct ContentView_Previews: PreviewProvider {
 	static var previews: some View {
 		MainView()
 	}
 }
+#endif
 
-// (todoItems.filter({ searchText.isEmpty ? true : $0.name.contains(searchText) }))
+enum TabView {
+	case home, search
+}
