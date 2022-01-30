@@ -7,18 +7,26 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		00337E0028F362E19BA76261 /* Pods_OmniverseCharacters.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 050F3ED4FD4B71CF37E41FA8 /* Pods_OmniverseCharacters.framework */; };
 		2A1C0C2D27A6D46200E000CB /* OmniverseCharactersApp.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2A1C0C2C27A6D46200E000CB /* OmniverseCharactersApp.swift */; };
-		2A1C0C2F27A6D46200E000CB /* ContentView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2A1C0C2E27A6D46200E000CB /* ContentView.swift */; };
+		2A1C0C2F27A6D46200E000CB /* MainView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2A1C0C2E27A6D46200E000CB /* MainView.swift */; };
 		2A1C0C3127A6D46400E000CB /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 2A1C0C3027A6D46400E000CB /* Assets.xcassets */; };
 		2A1C0C3427A6D46400E000CB /* Preview Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 2A1C0C3327A6D46400E000CB /* Preview Assets.xcassets */; };
+		2A1C0C3E27A6D59300E000CB /* MainViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2A1C0C3D27A6D59300E000CB /* MainViewModel.swift */; };
+		2A1C0C4027A6D68C00E000CB /* Character.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2A1C0C3F27A6D68C00E000CB /* Character.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
+		050F3ED4FD4B71CF37E41FA8 /* Pods_OmniverseCharacters.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_OmniverseCharacters.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		2A1C0C2927A6D46200E000CB /* OmniverseCharacters.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = OmniverseCharacters.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		2A1C0C2C27A6D46200E000CB /* OmniverseCharactersApp.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OmniverseCharactersApp.swift; sourceTree = "<group>"; };
-		2A1C0C2E27A6D46200E000CB /* ContentView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ContentView.swift; sourceTree = "<group>"; };
+		2A1C0C2E27A6D46200E000CB /* MainView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MainView.swift; sourceTree = "<group>"; };
 		2A1C0C3027A6D46400E000CB /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		2A1C0C3327A6D46400E000CB /* Preview Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = "Preview Assets.xcassets"; sourceTree = "<group>"; };
+		2A1C0C3D27A6D59300E000CB /* MainViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MainViewModel.swift; sourceTree = "<group>"; };
+		2A1C0C3F27A6D68C00E000CB /* Character.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Character.swift; sourceTree = "<group>"; };
+		654CB873A2920005B80E5F14 /* Pods-OmniverseCharacters.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-OmniverseCharacters.release.xcconfig"; path = "Target Support Files/Pods-OmniverseCharacters/Pods-OmniverseCharacters.release.xcconfig"; sourceTree = "<group>"; };
+		C625CB91336B2E88238194FD /* Pods-OmniverseCharacters.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-OmniverseCharacters.debug.xcconfig"; path = "Target Support Files/Pods-OmniverseCharacters/Pods-OmniverseCharacters.debug.xcconfig"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -26,6 +34,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				00337E0028F362E19BA76261 /* Pods_OmniverseCharacters.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -37,6 +46,8 @@
 			children = (
 				2A1C0C2B27A6D46200E000CB /* OmniverseCharacters */,
 				2A1C0C2A27A6D46200E000CB /* Products */,
+				C03A4CE83ED16F2ABC7ABF2E /* Pods */,
+				4A27D8878531AABF60659C67 /* Frameworks */,
 			);
 			sourceTree = "<group>";
 		};
@@ -52,7 +63,9 @@
 			isa = PBXGroup;
 			children = (
 				2A1C0C2C27A6D46200E000CB /* OmniverseCharactersApp.swift */,
-				2A1C0C2E27A6D46200E000CB /* ContentView.swift */,
+				2A1C0C3A27A6D55E00E000CB /* View */,
+				2A1C0C3B27A6D56300E000CB /* ViewModel */,
+				2A1C0C3C27A6D56E00E000CB /* Model */,
 				2A1C0C3027A6D46400E000CB /* Assets.xcassets */,
 				2A1C0C3227A6D46400E000CB /* Preview Content */,
 			);
@@ -67,6 +80,47 @@
 			path = "Preview Content";
 			sourceTree = "<group>";
 		};
+		2A1C0C3A27A6D55E00E000CB /* View */ = {
+			isa = PBXGroup;
+			children = (
+				2A1C0C2E27A6D46200E000CB /* MainView.swift */,
+			);
+			path = View;
+			sourceTree = "<group>";
+		};
+		2A1C0C3B27A6D56300E000CB /* ViewModel */ = {
+			isa = PBXGroup;
+			children = (
+				2A1C0C3D27A6D59300E000CB /* MainViewModel.swift */,
+			);
+			path = ViewModel;
+			sourceTree = "<group>";
+		};
+		2A1C0C3C27A6D56E00E000CB /* Model */ = {
+			isa = PBXGroup;
+			children = (
+				2A1C0C3F27A6D68C00E000CB /* Character.swift */,
+			);
+			path = Model;
+			sourceTree = "<group>";
+		};
+		4A27D8878531AABF60659C67 /* Frameworks */ = {
+			isa = PBXGroup;
+			children = (
+				050F3ED4FD4B71CF37E41FA8 /* Pods_OmniverseCharacters.framework */,
+			);
+			name = Frameworks;
+			sourceTree = "<group>";
+		};
+		C03A4CE83ED16F2ABC7ABF2E /* Pods */ = {
+			isa = PBXGroup;
+			children = (
+				C625CB91336B2E88238194FD /* Pods-OmniverseCharacters.debug.xcconfig */,
+				654CB873A2920005B80E5F14 /* Pods-OmniverseCharacters.release.xcconfig */,
+			);
+			path = Pods;
+			sourceTree = "<group>";
+		};
 /* End PBXGroup section */
 
 /* Begin PBXNativeTarget section */
@@ -74,6 +128,7 @@
 			isa = PBXNativeTarget;
 			buildConfigurationList = 2A1C0C3727A6D46400E000CB /* Build configuration list for PBXNativeTarget "OmniverseCharacters" */;
 			buildPhases = (
+				5590A5C91B4CF2D3669B495C /* [CP] Check Pods Manifest.lock */,
 				2A1C0C2527A6D46200E000CB /* Sources */,
 				2A1C0C2627A6D46200E000CB /* Frameworks */,
 				2A1C0C2727A6D46200E000CB /* Resources */,
@@ -132,13 +187,40 @@
 		};
 /* End PBXResourcesBuildPhase section */
 
+/* Begin PBXShellScriptBuildPhase section */
+		5590A5C91B4CF2D3669B495C /* [CP] Check Pods Manifest.lock */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputFileListPaths = (
+			);
+			inputPaths = (
+				"${PODS_PODFILE_DIR_PATH}/Podfile.lock",
+				"${PODS_ROOT}/Manifest.lock",
+			);
+			name = "[CP] Check Pods Manifest.lock";
+			outputFileListPaths = (
+			);
+			outputPaths = (
+				"$(DERIVED_FILE_DIR)/Pods-OmniverseCharacters-checkManifestLockResult.txt",
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "diff \"${PODS_PODFILE_DIR_PATH}/Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [ $? != 0 ] ; then\n    # print error to STDERR\n    echo \"error: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\" >&2\n    exit 1\nfi\n# This output is used by Xcode 'outputs' to avoid re-running this script phase.\necho \"SUCCESS\" > \"${SCRIPT_OUTPUT_FILE_0}\"\n";
+			showEnvVarsInLog = 0;
+		};
+/* End PBXShellScriptBuildPhase section */
+
 /* Begin PBXSourcesBuildPhase section */
 		2A1C0C2527A6D46200E000CB /* Sources */ = {
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				2A1C0C2F27A6D46200E000CB /* ContentView.swift in Sources */,
+				2A1C0C2F27A6D46200E000CB /* MainView.swift in Sources */,
 				2A1C0C2D27A6D46200E000CB /* OmniverseCharactersApp.swift in Sources */,
+				2A1C0C3E27A6D59300E000CB /* MainViewModel.swift in Sources */,
+				2A1C0C4027A6D68C00E000CB /* Character.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -263,6 +345,7 @@
 		};
 		2A1C0C3827A6D46400E000CB /* Debug */ = {
 			isa = XCBuildConfiguration;
+			baseConfigurationReference = C625CB91336B2E88238194FD /* Pods-OmniverseCharacters.debug.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
@@ -292,6 +375,7 @@
 		};
 		2A1C0C3927A6D46400E000CB /* Release */ = {
 			isa = XCBuildConfiguration;
+			baseConfigurationReference = 654CB873A2920005B80E5F14 /* Pods-OmniverseCharacters.release.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
