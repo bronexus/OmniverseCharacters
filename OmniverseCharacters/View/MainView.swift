@@ -44,6 +44,7 @@ struct MainView: View {
 				.frame(width: UIScreen.screenWidth, height: 40)
 			}
 		}
+		.ignoresSafeArea(.keyboard)
 	}
 }
 

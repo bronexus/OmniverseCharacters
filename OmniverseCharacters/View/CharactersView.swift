@@ -9,18 +9,47 @@ import SwiftUI
 
 struct CharactersView: View {
 	@ObservedObject var vm = CharacterViewModel()
+	@State var currentPage: Int = 1
 	
     var body: some View {
 		NavigationView {
-			ScrollView {
-				ForEach(vm.characters ?? [], id: \.id) { character in
-					CharacterCard(character: character)
+			VStack {
+				ScrollView {
+					ForEach(vm.characters ?? [], id: \.id) { character in
+						CharacterCard(character: character)
+					}
+				}
+				
+				HStack {
+					Button {
+						if currentPage > 1 {
+							currentPage -= 1
+							vm.loadCharacters(page: currentPage)
+						}
+					} label: {
+						Image(systemName: "arrow.up.circle")
+							.rotationEffect(.degrees(-90))
+					}
+					
+					Spacer()
+					
+					Button {
+						if currentPage < 42 {
+							currentPage += 1
+							vm.loadCharacters(page: currentPage)
+						}
+					} label: {
+						Image(systemName: "arrow.up.circle")
+							.rotationEffect(.degrees(90))
+					}
 				}
 			}
+			.padding(.horizontal)
 			.navigationBarTitle("Omniverse Characters")
 			.onAppear {
-				vm.loadCharacters(page: 1)
+				vm.loadCharacters(page: currentPage)
 			}
+			
 		}
     }
 }
