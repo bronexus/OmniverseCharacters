@@ -12,14 +12,15 @@ struct MainView: View {
 	
     var body: some View {
 		NavigationView {
-			List(vm.character?.results ?? [], id: \.id) { character in
-				Text(character.name)
+			List(vm.myCharacters ?? [], id: \.id) { myCharacter in
+				Text(myCharacter.name)
+				
 			}
 			.navigationTitle("Omniverse Characters")
 			.listStyle(.plain)
-		}
-		.onAppear {
-			vm.getCharacters(urlString: "https://rickandmortyapi.com/api/character")
+			.onAppear {
+				vm.getCharacters()
+			}
 		}
     }
 }

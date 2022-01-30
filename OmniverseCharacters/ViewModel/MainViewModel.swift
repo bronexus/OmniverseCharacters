@@ -6,29 +6,27 @@
 //
 
 import Foundation
+import Combine
 
 class MainViewModel: ObservableObject {
 	
-	@Published var character: Character?
+	@Published var myCharacters: [RMCharacterModel]?
+	
+	let rmClient = RMClient()
+	
+	var cancellable: AnyCancellable?
 	
 //	init() {
-//		
+//		cancellable = rmClient.character().getAllCharacters()
+//			.sink(receiveCompletion: { _ in }, receiveValue: { characters in
+//				characters.forEach() { print ($0.name) }
+//			})
 //	}
 	
-	func getCharacters(urlString: String) {
-		guard let url = URL(string: urlString) else { return }
-		let session = URLSession(configuration: .default)
-		
-		session.dataTask(with: url) { (data, resp, error) in
-			guard let data = data else { return }
-			do {
-				let json = try JSONDecoder().decode(Character.self, from: data)
-				DispatchQueue.main.async {
-					self.character = json
-				}
-			} catch {
-				print("Lusione: \(error.localizedDescription)")
-			}
-		}.resume()
+	func getCharacters() {
+		cancellable = rmClient.character().getAllCharacters()
+			.sink(receiveCompletion: { _ in }, receiveValue: { characters in
+				self.myCharacters = characters
+			})
 	}
 }
