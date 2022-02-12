@@ -11,7 +11,7 @@ import SwiftUI
 struct OmniverseCharactersApp: App {
     var body: some Scene {
         WindowGroup {
-            MainView()
+			CharactersView()
         }
     }
 }

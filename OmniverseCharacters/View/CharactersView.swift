@@ -6,6 +6,7 @@
 //
 
 import SwiftUI
+import Kingfisher
 
 struct CharactersView: View {
 	@ObservedObject var vm = CharacterViewModel()
@@ -77,23 +78,11 @@ struct CharacterCard: View {
 	
 	var body: some View {
 		HStack {
-			AsyncImage(url: URL(string: character.image)) { image in
-				image
-					.resizable()
-					.scaledToFit()
-			} placeholder: {
-				ZStack {
-					Image("character_image_placeholder")
-						.resizable()
-						.scaledToFit()
-						.blur(radius: 3)
-					ProgressView()
-						.progressViewStyle(CircularProgressViewStyle(tint: Color.orange))
-					//								.scaleEffect(2)
-				}
-			}
-			.frame(width: 120, height: 120)
-			.cornerRadius(20)
+			KFImage.url(URL(string: character.image))
+				.resizable()
+				.scaledToFit()
+				.frame(width: 120, height: 120)
+				.cornerRadius(20)
 			
 			VStack(alignment: .leading) {
 				Text(character.name)

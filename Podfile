@@ -6,5 +6,7 @@ target 'OmniverseCharacters' do
   use_frameworks!
 
   # Pods for OmniverseCharacters
+	
+	pod 'Kingfisher', '~> 7.0'
 
 end
