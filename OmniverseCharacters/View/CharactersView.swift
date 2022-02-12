@@ -12,62 +12,84 @@ struct CharactersView: View {
 	@ObservedObject var vm = CharacterViewModel()
 	@State var currentPage: Int = 1
 	
-    var body: some View {
+	var body: some View {
 		NavigationView {
-			ZStack {
-				VStack {
-					ScrollView {
-						ForEach(vm.characters ?? [], id: \.id) { character in
-							NavigationLink {
-								DetailCharacterView(character: character)
-							} label: {
-								CharacterCard(character: character)
-							}
-							.padding(.horizontal)
+			VStack(spacing: 0.0) {
+				HStack {
+					Text("Omniverse Characters")
+						.font(.system(.title, design: .rounded).weight(.bold))
+						.foregroundColor(Color.black)
+					
+					Spacer()
+					
+					NavigationLink {
+						SearchCharacter()
+					} label: {
+						CustomButtonImage(image: "magnifyingglass")
+					}
+				}
+				.padding(.horizontal)
+				
+				Divider()
+					.padding(.top, 8)
+				
+				ScrollView {
+					ForEach(vm.characters ?? [], id: \.id) { character in
+						NavigationLink {
+							DetailCharacterView(character: character)
+						} label: {
+							CharacterCard(character: character)
 						}
+						.padding(.horizontal)
+					}
+				}
+				
+				Divider()
+					.padding(.bottom, 8)
+				
+				HStack {
+					Button {
+						if currentPage > 1 {
+							currentPage -= 1
+							vm.loadCharacters(page: currentPage)
+						}
+					} label: {
+						CustomButtonImage(image: "arrow.up")
+							.rotationEffect(.degrees(-90))
 					}
 					
-					HStack {
-						Button {
-							if currentPage > 1 {
-								currentPage -= 1
-								vm.loadCharacters(page: currentPage)
-							}
-						} label: {
-							Image(systemName: "arrow.up.circle")
-								.rotationEffect(.degrees(-90))
+					Spacer()
+					Text("\(currentPage)/42")
+						.font(.system(.body, design: .rounded).weight(.medium))
+						.foregroundColor(Color.black)
+					Spacer()
+					
+					Button {
+						if currentPage < 42 {
+							currentPage += 1
+							vm.loadCharacters(page: currentPage)
 						}
-						
-						Spacer()
-						Text("\(currentPage)/42")
-						Spacer()
-						
-						Button {
-							if currentPage < 42 {
-								currentPage += 1
-								vm.loadCharacters(page: currentPage)
-							}
-						} label: {
-							Image(systemName: "arrow.up.circle")
-								.rotationEffect(.degrees(90))
-						}
+					} label: {
+						CustomButtonImage(image: "arrow.up")
+							.rotationEffect(.degrees(90))
 					}
-					.padding(.horizontal)
 				}
-				.navigationBarTitle("Characters")
-				.onAppear {
-					vm.loadCharacters(page: currentPage)
+				.padding(.horizontal)
 			}
+			.onAppear {
+				vm.loadCharacters(page: currentPage)
 			}
+			.navigationBarHidden(true)
+			.background(Color.white.ignoresSafeArea())
 		}
-    }
+	}
 }
 
 #if DEBUG
 struct CharactersView_Previews: PreviewProvider {
-    static var previews: some View {
-        CharactersView()
-    }
+	static var previews: some View {
+		CharactersView()
+	}
 }
 #endif
 
@@ -81,27 +103,23 @@ struct CharacterCard: View {
 			KFImage.url(URL(string: character.image))
 				.resizable()
 				.scaledToFit()
-				.frame(width: 120, height: 120)
+				.frame(width: 96)
 				.cornerRadius(20)
 			
 			VStack(alignment: .leading) {
 				Text(character.name)
-					.font(.system(.title3, design: .rounded).weight(.bold))
+					.font(.system(.headline, design: .rounded).weight(.bold))
 					.foregroundColor(Color.orange)
 				Text("Last location:")
-					.font(.system(.footnote, design: .rounded).weight(.regular))
-					.foregroundColor(Color(UIColor.label))
+					.font(.system(.caption, design: .rounded).weight(.regular))
 				Text(character.location.name)
-					.font(.system(.body, design: .rounded).weight(.medium))
-					.foregroundColor(Color(UIColor.label))
+					.font(.system(.footnote, design: .rounded).weight(.medium))
 					.lineLimit(1)
 					.minimumScaleFactor(0.5)
 				Text("First seen in:")
-					.font(.system(.footnote, design: .rounded).weight(.regular))
-					.foregroundColor(Color(UIColor.label))
+					.font(.system(.caption, design: .rounded).weight(.regular))
 				Text(firstEpisode)
-					.font(.system(.body, design: .rounded).weight(.medium))
-					.foregroundColor(Color(UIColor.label))
+					.font(.system(.footnote, design: .rounded).weight(.medium))
 					.lineLimit(1)
 					.minimumScaleFactor(0.5)
 					.onAppear {
@@ -110,14 +128,30 @@ struct CharacterCard: View {
 						}
 					}
 			}
+			.foregroundColor(Color.black)
 			.padding(.vertical, 8)
 			.padding(.trailing, 8)
 			
 			Spacer()
 		}
-		.background(Color(UIColor.systemBackground))
+		.padding(.trailing, 8)
+		.background(Color(hex: "EDEDED"))
 		.cornerRadius(20)
-		.shadow(color: Color(UIColor.label).opacity(0.2), radius: 5, x: 2, y: 2)
+		.shadow(color: Color(hex: "EDEDED"), radius: 4, x: 2, y: 2)
 	}
 }
 
+
+struct CustomButtonImage: View {
+	var image: String
+	
+	var body: some View {
+		Image(systemName: image)
+			.foregroundColor(Color.black)
+			.padding(12)
+			.overlay(
+				RoundedRectangle(cornerRadius: 15)
+					.stroke(Color(hex: "#CFCFCF"), lineWidth: 1)
+			)
+	}
+}

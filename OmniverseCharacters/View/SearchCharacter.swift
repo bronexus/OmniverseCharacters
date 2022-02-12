@@ -12,7 +12,7 @@ struct SearchCharacter: View {
 	@State var searchText: String = ""
 	
 	var body: some View {
-		NavigationView {
+		VStack {
 			if vm.allCharacters?.count == 826 {
 				List((vm.allCharacters ?? []).filter({ searchText.isEmpty ? true : $0.name.contains(searchText) })) { character in
 					Text(character.name)
