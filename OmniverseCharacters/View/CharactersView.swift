@@ -13,6 +13,7 @@ struct CharactersView: View {
 	@State var currentPage: Int = 1
 	
 	var body: some View {
+		NavigationView {
 		ZStack {
 			Color.white.ignoresSafeArea()
 			
@@ -83,9 +84,11 @@ struct CharactersView: View {
 			}
 			.padding(.bottom, Utility().isSmallDevice() ? 8 : 0)
 		}
+		.navigationTitle("")
 		.navigationBarHidden(true)
 		.onAppear {
 			vm.loadCharacters(page: currentPage)
+		}
 		}
 	}
 }

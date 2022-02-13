@@ -77,6 +77,7 @@ struct SearchCharacter: View {
 				}
 			}
 		}
+		.navigationBarHidden(true)
 		.onAppear {
 			vm.loadAllCharacters()
 		}
