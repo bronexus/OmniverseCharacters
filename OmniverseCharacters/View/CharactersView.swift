@@ -13,81 +13,79 @@ struct CharactersView: View {
 	@State var currentPage: Int = 1
 	
 	var body: some View {
-		NavigationView {
-			ZStack {
-				Color.white.ignoresSafeArea()
-				
-				VStack(spacing: 0.0) {
-					HStack {
-						Text("Omniverse Characters")
-							.font(.system(.title, design: .rounded).weight(.bold))
-							.foregroundColor(Color.black)
-							.minimumScaleFactor(0.5)
-						
-						Spacer()
-						
-						NavigationLink {
-							SearchCharacter()
-						} label: {
-							CustomButtonImage(image: "magnifyingglass")
-						}
+		ZStack {
+			Color.white.ignoresSafeArea()
+			
+			VStack(spacing: 0.0) {
+				HStack {
+					Text("Omniverse Characters")
+						.font(.system(.title, design: .rounded).weight(.bold))
+						.foregroundColor(Color.black)
+						.minimumScaleFactor(0.5)
+					
+					Spacer()
+					
+					NavigationLink {
+						SearchCharacter()
+					} label: {
+						CustomButtonImage(image: "magnifyingglass")
 					}
-					.padding(.horizontal)
-					
-					Divider()
-						.padding(.top, 8)
-					
-					ScrollView {
-						ForEach(vm.characters, id: \.id) { character in
-							NavigationLink {
-								DetailCharacterView(character: character)
-							} label: {
-								CharacterCard(character: character)
-							}
-							.padding(.horizontal)
-							.padding(.top, character.name == vm.characters.first?.name ? 10 : 0)
-							.padding(.bottom, character.name == vm.characters.last?.name ? 10 : 0)
-						}
-					}
-					
-					Divider()
-						.padding(.bottom, 8)
-					
-					HStack {
-						Button {
-							if currentPage > 1 {
-								currentPage -= 1
-								vm.loadCharacters(page: currentPage)
-							}
-						} label: {
-							CustomButtonImage(image: "arrow.up")
-								.rotationEffect(.degrees(-90))
-						}
-						
-						Spacer()
-						Text("\(currentPage)/42")
-							.font(.system(.body, design: .rounded).weight(.medium))
-							.foregroundColor(Color.black)
-						Spacer()
-						
-						Button {
-							if currentPage < 42 {
-								currentPage += 1
-								vm.loadCharacters(page: currentPage)
-							}
-						} label: {
-							CustomButtonImage(image: "arrow.up")
-								.rotationEffect(.degrees(90))
-						}
-					}
-					.padding(.horizontal)
 				}
-				.padding(.bottom, Utility().isSmallDevice() ? 8 : 0)
+				.padding(.horizontal)
+				
+				Divider()
+					.padding(.top, 8)
+				
+				ScrollView {
+					ForEach(vm.characters, id: \.id) { character in
+						NavigationLink {
+							DetailCharacterView(character: character)
+						} label: {
+							CharacterCard(character: character)
+						}
+						.padding(.horizontal)
+						.padding(.top, character.name == vm.characters.first?.name ? 10 : 0)
+						.padding(.bottom, character.name == vm.characters.last?.name ? 10 : 0)
+					}
+				}
+				
+				Divider()
+					.padding(.bottom, 8)
+				
+				HStack {
+					Button {
+						if currentPage > 1 {
+							currentPage -= 1
+							vm.loadCharacters(page: currentPage)
+						}
+					} label: {
+						CustomButtonImage(image: "arrow.up")
+							.rotationEffect(.degrees(-90))
+					}
+					
+					Spacer()
+					Text("\(currentPage)/42")
+						.font(.system(.body, design: .rounded).weight(.medium))
+						.foregroundColor(Color.black)
+					Spacer()
+					
+					Button {
+						if currentPage < 42 {
+							currentPage += 1
+							vm.loadCharacters(page: currentPage)
+						}
+					} label: {
+						CustomButtonImage(image: "arrow.up")
+							.rotationEffect(.degrees(90))
+					}
+				}
+				.padding(.horizontal)
 			}
-			.onAppear {
-				vm.loadCharacters(page: currentPage)
-			}
-			.navigationBarHidden(true)
+			.padding(.bottom, Utility().isSmallDevice() ? 8 : 0)
+		}
+		.navigationBarHidden(true)
+		.onAppear {
+			vm.loadCharacters(page: currentPage)
 		}
 	}
 }

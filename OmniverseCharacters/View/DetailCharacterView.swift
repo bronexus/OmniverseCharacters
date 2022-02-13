@@ -89,7 +89,6 @@ struct DetailCharacterView: View {
 				}
 			}
 		}
-		.navigationBarHidden(true)
 		.onAppear {
 			vm.loadCurrentLocation(url: character.location.url)
 		}

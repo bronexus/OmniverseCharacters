@@ -9,7 +9,6 @@
 /* Begin PBXBuildFile section */
 		00337E0028F362E19BA76261 /* Pods_OmniverseCharacters.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 050F3ED4FD4B71CF37E41FA8 /* Pods_OmniverseCharacters.framework */; };
 		2A1C0C2D27A6D46200E000CB /* OmniverseCharactersApp.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2A1C0C2C27A6D46200E000CB /* OmniverseCharactersApp.swift */; };
-		2A1C0C2F27A6D46200E000CB /* MainView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2A1C0C2E27A6D46200E000CB /* MainView.swift */; };
 		2A1C0C3127A6D46400E000CB /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 2A1C0C3027A6D46400E000CB /* Assets.xcassets */; };
 		2A1C0C3427A6D46400E000CB /* Preview Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 2A1C0C3327A6D46400E000CB /* Preview Assets.xcassets */; };
 		2A1C0C3E27A6D59300E000CB /* CharacterViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2A1C0C3D27A6D59300E000CB /* CharacterViewModel.swift */; };
@@ -33,7 +32,6 @@
 		050F3ED4FD4B71CF37E41FA8 /* Pods_OmniverseCharacters.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_OmniverseCharacters.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		2A1C0C2927A6D46200E000CB /* OmniverseCharacters.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = OmniverseCharacters.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		2A1C0C2C27A6D46200E000CB /* OmniverseCharactersApp.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OmniverseCharactersApp.swift; sourceTree = "<group>"; };
-		2A1C0C2E27A6D46200E000CB /* MainView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MainView.swift; sourceTree = "<group>"; };
 		2A1C0C3027A6D46400E000CB /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		2A1C0C3327A6D46400E000CB /* Preview Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = "Preview Assets.xcassets"; sourceTree = "<group>"; };
 		2A1C0C3D27A6D59300E000CB /* CharacterViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CharacterViewModel.swift; sourceTree = "<group>"; };
@@ -51,6 +49,7 @@
 		2A9A84A727A7276900B9AF6D /* SearchCharacterViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SearchCharacterViewModel.swift; sourceTree = "<group>"; };
 		2A9A84A927A72C9700B9AF6D /* DetailCharacterView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DetailCharacterView.swift; sourceTree = "<group>"; };
 		2A9A84AB27A7384600B9AF6D /* DetailCharacterViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DetailCharacterViewModel.swift; sourceTree = "<group>"; };
+		2AD29F0327B969C100816019 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist; path = Info.plist; sourceTree = "<group>"; };
 		654CB873A2920005B80E5F14 /* Pods-OmniverseCharacters.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-OmniverseCharacters.release.xcconfig"; path = "Target Support Files/Pods-OmniverseCharacters/Pods-OmniverseCharacters.release.xcconfig"; sourceTree = "<group>"; };
 		C625CB91336B2E88238194FD /* Pods-OmniverseCharacters.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-OmniverseCharacters.debug.xcconfig"; path = "Target Support Files/Pods-OmniverseCharacters/Pods-OmniverseCharacters.debug.xcconfig"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
@@ -88,6 +87,7 @@
 		2A1C0C2B27A6D46200E000CB /* OmniverseCharacters */ = {
 			isa = PBXGroup;
 			children = (
+				2AD29F0327B969C100816019 /* Info.plist */,
 				2A1C0C2C27A6D46200E000CB /* OmniverseCharactersApp.swift */,
 				2A9A84A027A71A7900B9AF6D /* Extensions */,
 				2A1C0C4127A6ED9D00E000CB /* APIClient */,
@@ -111,7 +111,6 @@
 		2A1C0C3A27A6D55E00E000CB /* View */ = {
 			isa = PBXGroup;
 			children = (
-				2A1C0C2E27A6D46200E000CB /* MainView.swift */,
 				2A9A849C27A7173200B9AF6D /* CharactersView.swift */,
 				2A9A84A927A72C9700B9AF6D /* DetailCharacterView.swift */,
 				2A9A849E27A7177F00B9AF6D /* SearchCharacter.swift */,
@@ -292,7 +291,6 @@
 			files = (
 				2A9A84AC27A7384600B9AF6D /* DetailCharacterViewModel.swift in Sources */,
 				2A9A84A627A71A7900B9AF6D /* View+Ext.swift in Sources */,
-				2A1C0C2F27A6D46200E000CB /* MainView.swift in Sources */,
 				2A1C0C2D27A6D46200E000CB /* OmniverseCharactersApp.swift in Sources */,
 				2A1C0C4A27A6EE1C00E000CB /* RMEpisode.swift in Sources */,
 				2A1C0C4727A6EDFF00E000CB /* RMCharacter.swift in Sources */,
@@ -441,6 +439,7 @@
 				DEVELOPMENT_TEAM = S6DJ727MSY;
 				ENABLE_PREVIEWS = YES;
 				GENERATE_INFOPLIST_FILE = YES;
+				INFOPLIST_FILE = OmniverseCharacters/Info.plist;
 				INFOPLIST_KEY_UIApplicationSceneManifest_Generation = YES;
 				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
 				INFOPLIST_KEY_UILaunchScreen_Generation = YES;
@@ -471,6 +470,7 @@
 				DEVELOPMENT_TEAM = S6DJ727MSY;
 				ENABLE_PREVIEWS = YES;
 				GENERATE_INFOPLIST_FILE = YES;
+				INFOPLIST_FILE = OmniverseCharacters/Info.plist;
 				INFOPLIST_KEY_UIApplicationSceneManifest_Generation = YES;
 				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
 				INFOPLIST_KEY_UILaunchScreen_Generation = YES;
