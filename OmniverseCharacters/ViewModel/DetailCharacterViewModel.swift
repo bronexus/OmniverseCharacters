@@ -10,12 +10,11 @@ import Combine
 
 class DetailCharacterViewModel: ObservableObject {
 	
-	@Published var locationCharacters: [RMCharacterModel]?
+	@Published var locationCharacters = [RMCharacterModel]()
 	
 	
 	let rmClient = RMClient()
 	var cancellable: AnyCancellable?
-	var cancellable2: AnyCancellable?
 	
 	init() {
 	
@@ -24,13 +23,22 @@ class DetailCharacterViewModel: ObservableObject {
 	func loadCurrentLocation(url: String) {
 		cancellable = rmClient.location().getLocationByURL(url: url)
 			.sink(receiveCompletion: { _ in }, receiveValue: { location in
-				for url in location.residents {
-					self.cancellable2 = self.rmClient.character().getCharacterByURL(url: url)
-						.sink(receiveCompletion: { _ in }, receiveValue: { character in
-							DispatchQueue.main.async {
-								self.locationCharacters?.append(character)
+				for n in 0..<(location.residents.count) where n < 7 {
+					guard let url = URL(string: location.residents[n]) else { return }
+					
+					URLSession.shared.dataTask(with: url) { (data, resp, err) in
+						
+						DispatchQueue.main.async {
+							guard let data = data else { return }
+							do {
+								let character = try JSONDecoder().decode(RMCharacterModel.self, from: data)
+								self.locationCharacters.append(character)
+							} catch {
+								print("Failed to decode JSON:", error)
 							}
-						})
+						}
+						
+					}.resume()
 				}
 			})
 	}

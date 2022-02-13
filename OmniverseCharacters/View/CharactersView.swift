@@ -19,6 +19,7 @@ struct CharactersView: View {
 					Text("Omniverse Characters")
 						.font(.system(.title, design: .rounded).weight(.bold))
 						.foregroundColor(Color.black)
+						.minimumScaleFactor(0.5)
 					
 					Spacer()
 					

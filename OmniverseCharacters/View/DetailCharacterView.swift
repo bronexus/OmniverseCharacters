@@ -26,11 +26,23 @@ struct DetailCharacterView: View {
 					}
 					
 					Spacer()
+					
+					Text(character.name)
+						.font(.system(.title, design: .rounded).weight(.bold))
+						.foregroundColor(Color.black)
+						.minimumScaleFactor(0.5)
+						.multilineTextAlignment(.center)
+					
+					Spacer()
+					
+					CustomButtonImage(image: "chevron.left")
+						.opacity(0)
 				}
+				.padding(.horizontal)
 				
 				Divider()
 				
-				ScrollView {
+				VStack {
 					HStack {
 						
 						KFImage.url(URL(string: character.image))
@@ -52,17 +64,20 @@ struct DetailCharacterView: View {
 						Spacer()
 					}
 					.padding(.bottom, 40)
+					
+					ScrollView {
+					ForEach((vm.locationCharacters), id: \.id) { character in
+						CharacterCard(character: character)
+					}
+					}
 				}
 
-				ForEach((vm.locationCharacters ?? []), id: \.id) { character in
-					CharacterCard(character: character)
-				}
+				
 				
 				
 				
 				Spacer()
 			}
-			.padding(.horizontal)
 		}
 		.navigationBarHidden(true)
 		.onAppear {
