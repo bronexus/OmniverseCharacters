@@ -66,6 +66,7 @@ struct DetailCharacterView: View {
 					.font(.system(.body, design: .rounded).weight(.medium))
 					.foregroundColor(Color.black)
 					.multilineTextAlignment(.center)
+					.padding(.horizontal)
 					.onAppear {
 						vm.loadEpisodeName(url: character.episode.first ?? "") { episodeName in
 							firstEpisode = episodeName

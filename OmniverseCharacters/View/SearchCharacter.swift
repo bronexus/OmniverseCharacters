@@ -17,7 +17,7 @@ struct SearchCharacter: View {
 				List((vm.allCharacters ?? []).filter({ searchText.isEmpty ? true : $0.name.contains(searchText) })) { character in
 					Text(character.name)
 				}
-				.searchable(text: $searchText, prompt: "Search by name")
+//				.searchable(text: $searchText, prompt: "Search by name")
 				.navigationTitle("Search")
 			} else {
 				Text("Loading...")

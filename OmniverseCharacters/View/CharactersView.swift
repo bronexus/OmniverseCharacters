@@ -14,76 +14,80 @@ struct CharactersView: View {
 	
 	var body: some View {
 		NavigationView {
-			VStack(spacing: 0.0) {
-				HStack {
-					Text("Omniverse Characters")
-						.font(.system(.title, design: .rounded).weight(.bold))
-						.foregroundColor(Color.black)
-						.minimumScaleFactor(0.5)
-					
-					Spacer()
-					
-					NavigationLink {
-						SearchCharacter()
-					} label: {
-						CustomButtonImage(image: "magnifyingglass")
-					}
-				}
-				.padding(.horizontal)
+			ZStack {
+				Color.white.ignoresSafeArea()
 				
-				Divider()
-					.padding(.top, 8)
-				
-				ScrollView {
-					ForEach(vm.characters, id: \.id) { character in
+				VStack(spacing: 0.0) {
+					HStack {
+						Text("Omniverse Characters")
+							.font(.system(.title, design: .rounded).weight(.bold))
+							.foregroundColor(Color.black)
+							.minimumScaleFactor(0.5)
+						
+						Spacer()
+						
 						NavigationLink {
-							DetailCharacterView(character: character)
+							SearchCharacter()
 						} label: {
-							CharacterCard(character: character)
+							CustomButtonImage(image: "magnifyingglass")
 						}
-						.padding(.horizontal)
-						.padding(.top, character.name == vm.characters.first?.name ? 10 : 0)
-						.padding(.bottom, character.name == vm.characters.last?.name ? 10 : 0)
 					}
-				}
-				
-				Divider()
-					.padding(.bottom, 8)
-				
-				HStack {
-					Button {
-						if currentPage > 1 {
-							currentPage -= 1
-							vm.loadCharacters(page: currentPage)
+					.padding(.horizontal)
+					
+					Divider()
+						.padding(.top, 8)
+					
+					ScrollView {
+						ForEach(vm.characters, id: \.id) { character in
+							NavigationLink {
+								DetailCharacterView(character: character)
+							} label: {
+								CharacterCard(character: character)
+							}
+							.padding(.horizontal)
+							.padding(.top, character.name == vm.characters.first?.name ? 10 : 0)
+							.padding(.bottom, character.name == vm.characters.last?.name ? 10 : 0)
 						}
-					} label: {
-						CustomButtonImage(image: "arrow.up")
-							.rotationEffect(.degrees(-90))
 					}
 					
-					Spacer()
-					Text("\(currentPage)/42")
-						.font(.system(.body, design: .rounded).weight(.medium))
-						.foregroundColor(Color.black)
-					Spacer()
+					Divider()
+						.padding(.bottom, 8)
 					
-					Button {
-						if currentPage < 42 {
-							currentPage += 1
-							vm.loadCharacters(page: currentPage)
+					HStack {
+						Button {
+							if currentPage > 1 {
+								currentPage -= 1
+								vm.loadCharacters(page: currentPage)
+							}
+						} label: {
+							CustomButtonImage(image: "arrow.up")
+								.rotationEffect(.degrees(-90))
 						}
-					} label: {
-						CustomButtonImage(image: "arrow.up")
-							.rotationEffect(.degrees(90))
+						
+						Spacer()
+						Text("\(currentPage)/42")
+							.font(.system(.body, design: .rounded).weight(.medium))
+							.foregroundColor(Color.black)
+						Spacer()
+						
+						Button {
+							if currentPage < 42 {
+								currentPage += 1
+								vm.loadCharacters(page: currentPage)
+							}
+						} label: {
+							CustomButtonImage(image: "arrow.up")
+								.rotationEffect(.degrees(90))
+						}
 					}
+					.padding(.horizontal)
 				}
-				.padding(.horizontal)
+				.padding(.bottom, Utility().isSmallDevice() ? 8 : 0)
 			}
 			.onAppear {
 				vm.loadCharacters(page: currentPage)
 			}
 			.navigationBarHidden(true)
-			.background(Color.white.ignoresSafeArea())
 		}
 	}
 }
