@@ -15,6 +15,7 @@ struct DetailCharacterView: View {
 	@State var firstEpisode: String = ""
 	
 	var body: some View {
+		NavigationView {
 		ZStack {
 			Color.white.ignoresSafeArea()
 			
@@ -93,6 +94,8 @@ struct DetailCharacterView: View {
 		.onAppear {
 			vm.loadCurrentLocation(url: character.location.url)
 		}
+		}
+		.navigationBarHidden(true)
 	}
 }
 
