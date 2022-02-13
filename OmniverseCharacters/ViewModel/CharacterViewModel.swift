@@ -10,7 +10,7 @@ import Combine
 
 class CharacterViewModel: ObservableObject {
 	
-	@Published var characters: [RMCharacterModel]?
+	@Published var characters = [RMCharacterModel]()
 	
 	let rmClient = RMClient()
 	var cancellable: AnyCancellable?

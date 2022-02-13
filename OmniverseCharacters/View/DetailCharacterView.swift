@@ -11,13 +11,14 @@ import Kingfisher
 struct DetailCharacterView: View {
 	@Environment(\.presentationMode) var presentationMode
 	@ObservedObject var vm = DetailCharacterViewModel()
-	var character: RMCharacterModel
+	@State var character: RMCharacterModel
+	@State var firstEpisode: String = ""
 	
 	var body: some View {
 		ZStack {
 			Color.white.ignoresSafeArea()
 			
-			VStack(spacing: 8.0) {
+			VStack(spacing: 0.0) {
 				HStack {
 					Button {
 						presentationMode.wrappedValue.dismiss()
@@ -39,96 +40,58 @@ struct DetailCharacterView: View {
 						.opacity(0)
 				}
 				.padding(.horizontal)
+				.padding(.bottom, 8)
+				
+				VStack {
+					
+					KFImage.url(URL(string: character.image))
+						.resizable()
+						.scaledToFit()
+						.frame(width: 180)
+						.cornerRadius(20)
+					
+					VStack {
+						CharacterDetailLine(title: "Gender", text: character.gender)
+						CharacterDetailLine(title: "Species", text: character.species)
+						CharacterDetailLine(title: "Type", text: character.type)
+						CharacterDetailLine(title: "Location", text: character.location.name)
+						CharacterDetailLine(title: "Origin", text: character.origin.name)
+						CharacterDetailLine(title: "Status", text: character.status)
+					}
+					.padding(.horizontal)
+				}
+				.padding(.bottom, 8)
+				
+				Text("Also from episode ‘\(firstEpisode)’")
+					.font(.system(.body, design: .rounded).weight(.medium))
+					.foregroundColor(Color.black)
+					.multilineTextAlignment(.center)
+					.onAppear {
+						vm.loadEpisodeName(url: character.episode.first ?? "") { episodeName in
+							firstEpisode = episodeName
+						}
+					}
 				
 				Divider()
 				
-				VStack {
-					HStack {
-						
-						KFImage.url(URL(string: character.image))
-							.resizable()
-							.scaledToFit()
-							.frame(width: 120)
-							.cornerRadius(20)
-
-						VStack {
-							Text(character.gender)
-							Text(character.species)
-							Text(character.type)
-							Text(character.location.name)
-							Text(character.origin.name)
-							Text(character.status)
+				ScrollView {
+					ForEach((vm.locationCharacters), id: \.id) { resident in
+						Button {
+							self.character = resident
+						} label: {
+							CharacterCard(character: resident)
 						}
-						.foregroundColor(Color.black)
-
-						Spacer()
-					}
-					.padding(.bottom, 40)
-					
-					ScrollView {
-					ForEach((vm.locationCharacters), id: \.id) { character in
-						CharacterCard(character: character)
-					}
+						.padding(.horizontal)
+						.padding(.top, resident.name == vm.locationCharacters.first?.name ? 10 : 0)
+						.padding(.bottom, resident.name == vm.locationCharacters.last?.name ? 10 : 0)
 					}
 				}
-
-				
-				
-				
-				
-				Spacer()
 			}
 		}
 		.navigationBarHidden(true)
 		.onAppear {
 			vm.loadCurrentLocation(url: character.location.url)
 		}
-		
-		//		ZStack {
-		//			VStack {
-//						ScrollView {
-//							HStack {
-//								AsyncImage(url: URL(string: character.image)) { image in
-//									image
-//										.resizable()
-//										.scaledToFit()
-//								} placeholder: {
-//									ZStack {
-//										Image("character_image_placeholder")
-//											.resizable()
-//											.scaledToFit()
-//											.blur(radius: 3)
-//										ProgressView()
-//											.progressViewStyle(CircularProgressViewStyle(tint: Color.orange))
-//										//								.scaleEffect(2)
-//									}
-//								}
-//								.frame(width: UIScreen.screenWidth * 0.3, height: UIScreen.screenWidth * 0.3)
-//								.cornerRadius(16)
-//
-//								VStack {
-//									Text(character.gender)
-//									Text(character.species)
-//									Text(character.type)
-//									Text(character.location.name)
-//									Text(character.origin.name)
-//									Text(character.status)
-//								}
-//
-//								Spacer()
-//							}
-//							.padding(.bottom, 40)
-//						}
-//
-//						ForEach((vm.locationCharacters ?? []), id: \.id) { character in
-//							CharacterCard(character: character)
-//						}
-		//			}
-		//			.navigationBarTitle(character.name)
-		//		}
-		//		.onAppear {
-		//			vm.loadCurrentLocation(url: character.location.url)
-		//		}
 	}
 }
 
@@ -141,3 +104,19 @@ struct DetailCharacterView: View {
 //}
 //#endif
 
+
+struct CharacterDetailLine: View {
+	var title: String
+	var text: String
+	
+	var body: some View {
+		HStack {
+			Text(title)
+				.font(.system(.caption, design: .rounded).weight(.regular))
+			Spacer()
+			Text(text)
+				.font(.system(.footnote, design: .rounded).weight(.medium))
+		}
+		.foregroundColor(Color.black)
+	}
+}

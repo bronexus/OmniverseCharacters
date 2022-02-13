@@ -35,13 +35,15 @@ struct CharactersView: View {
 					.padding(.top, 8)
 				
 				ScrollView {
-					ForEach(vm.characters ?? [], id: \.id) { character in
+					ForEach(vm.characters, id: \.id) { character in
 						NavigationLink {
 							DetailCharacterView(character: character)
 						} label: {
 							CharacterCard(character: character)
 						}
 						.padding(.horizontal)
+						.padding(.top, character.name == vm.characters.first?.name ? 10 : 0)
+						.padding(.bottom, character.name == vm.characters.last?.name ? 10 : 0)
 					}
 				}
 				

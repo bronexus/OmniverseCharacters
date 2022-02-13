@@ -12,9 +12,9 @@ class DetailCharacterViewModel: ObservableObject {
 	
 	@Published var locationCharacters = [RMCharacterModel]()
 	
-	
 	let rmClient = RMClient()
 	var cancellable: AnyCancellable?
+	var cancellable2: AnyCancellable?
 	
 	init() {
 	
@@ -23,7 +23,7 @@ class DetailCharacterViewModel: ObservableObject {
 	func loadCurrentLocation(url: String) {
 		cancellable = rmClient.location().getLocationByURL(url: url)
 			.sink(receiveCompletion: { _ in }, receiveValue: { location in
-				for n in 0..<(location.residents.count) where n < 7 {
+				for n in 0..<(location.residents.count) where n < 9 {
 					guard let url = URL(string: location.residents[n]) else { return }
 					
 					URLSession.shared.dataTask(with: url) { (data, resp, err) in
@@ -40,6 +40,13 @@ class DetailCharacterViewModel: ObservableObject {
 						
 					}.resume()
 				}
+			})
+	}
+	
+	func loadEpisodeName(url: String, callback: @escaping (String) -> ()) {
+		cancellable2 = rmClient.episode().getEpisodeByURL(url: url)
+			.sink(receiveCompletion: { _ in }, receiveValue: { episode in
+				callback(episode.name)
 			})
 	}
 }
